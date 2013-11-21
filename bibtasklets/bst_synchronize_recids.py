@@ -52,7 +52,7 @@ from invenio.filedownloadutils import download_url, InvenioFileDownloadError
 from invenio.bibtaskutils import ChunkedBibUpload
 
 # LOOK AT ALL THE LOVELY VARIABLES!
-SCRIPT_NAME = "bst_sync_cds_inspire_recids"
+SCRIPT_NAME = "bst_synchronize_recids"
 NOW = time.strftime('%Y-%m-%d_%Hh%Mm%Ss')
 LOG_DIR = CFG_TMPSHAREDDIR
 LOG_FILE = "%s_%s.log" % (SCRIPT_NAME, NOW)
@@ -77,10 +77,10 @@ elif CFG_CERN_SITE:
 
 
 # Begin!
-def bst_sync_cds_inspire_recids(search_terms=SEARCH_TERMS, log_dir=None,
-                                collection=COLLECTION, batch_size=BATCH_SIZE,
-                                debug=False):
-    """Synchronize record IDs between the CERN Document Server (CDS) and Inspire.
+def bst_synchronize_recids(search_terms=SEARCH_TERMS, log_dir=None,
+                           collection=COLLECTION, batch_size=BATCH_SIZE,
+                           debug=False):
+    """Synchronize record IDs between the CERN Document Server (CDS) and Inspire
 
 This BibTasklet is intended to be a general purpose replacement for
 'bst_inspire_cds_synchro' and 'bst_update_cds_inspire_id', it should
@@ -173,7 +173,7 @@ def write_to_file(filename, data, output_dir=LOG_DIR, message=None,
                     handle.write("# %s\n" % message)
                 handle.write(data_string)
             _print("Wrote %d lines to file %s" % (data_string.count('\n'),
-                                                  qpath))
+                                                  path))
         except IOError:
             _print("ERROR: Could not write output to %s" % path, 1)
     else:
